@@ -1,0 +1,33 @@
+﻿@model SignalRWebUı.Dtos.MessageDtos.UpdateMessageDto
+
+@{
+    ViewData["Title"] = "GetContentMessage";
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+}
+
+
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Gelen Mesajı Görme Formu</div>
+        </div>
+        <form method="post">
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="subject">Mesaj Başlığı</label>
+                    <input type="text" asp-for="Subject" class="form-control" id="email" placeholder="Lütfen Mesaj Başlığını Giriniz...">
+                </div>
+                <div class="form-group">
+                    <label for="aciklama">Mesaj Açıklaması</label>
+                    <textarea asp-for="MessageContent" class="form-control" rows="12"></textarea>
+                </div>
+
+
+            </div>
+            <div class="card-action">
+                <a href="/Message/GetMessageIndex" class="btn btn-danger">Geri Dön</a>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,125 @@
+﻿@model List<SignalRWebUı.Dtos.BasketDtos.ResultBasketDtos>
+
+@{
+    Layout = null;
+    int Count = 0;
+    double ToplamTurar = 0;
+    double kdv = 1.1;
+}
+
+<!DOCTYPE html>
+<html>
+@await Component.InvokeAsync("_UILayoutHeadComponentPartial")
+<body class="sub_page">
+    @await Component.InvokeAsync("_MenuNavbarComponenetPartial")
+
+    <br />
+    <br />
+
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-12">
+                <nav class="breadcrumb bg-dark mb-30">
+                    <a class="breadcrumb-item text-white" href="/Default/Index">Ana Sayfa</a>
+                    <a class="breadcrumb-item text-white" href="/Default/Index">Menü</a>
+                    <span class="breadcrumb-item text-white active">Sepetiniz</span>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-lg-8 table-responsive mb-5">
+                <table class="table table-light table-borderless table-hover text-center mb-0">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Ürün Adı</th>
+                            <th>Adet</th>
+                            <th>Fiyat</th>
+                            <th>Toplam</th>
+                            <th>Sil</th>
+                        </tr>
+                    </thead>
+                    <tbody class="align-middle">
+                        @foreach (var x in Model)
+                        {
+                            Count++;
+                            ToplamTurar += double.Parse(x.TotalPrice.ToString());
+
+                            <tr>
+                                <td class="align-middle">@Count</td>
+                                <td class="align-middle">@x.ProductName</td>
+                                <td class="align-middle">@x.Count</td>
+                                <td class="align-middle">@x.Price.ToString("C")</td>
+                                <td class="align-middle">@x.TotalPrice.ToString("C")</td>
+                                <td class="align-middle btn-delete"><button data-basketid="@x.BasketId" id="btndeletebasketid" onclick="deletebasket(@x.BasketId);" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-lg-4">
+                <form>
+                    <div class="input-group">
+                        <input type="text" id="cupponcode" class="form-control border-1 p-4" placeholder="Kupon Kodunuz..." />
+                        <div>
+                            <a style="height:48px;padding-top:11px;color:#fff;margin-left:5px;cursor:pointer;" class="btn btn-warning" id="btncupponcode">Kuponu Uygula</a>
+                        </div>
+                    </div>
+                </form>
+                <br />
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="pr-3">Sepet Özeti</span></h5>
+                <br />
+                <div class=" p-30 mb-5">
+                    <div id="container" class="border-bottom pb-2">
+                        <div class="d-flex justify-content-between mb-3">
+                            <h6>Toplam Tutar</h6>
+                            <h6><span id="totalprice">@ToplamTurar.ToString("C")</span></h6>
+                        </div>
+                    </div>
+                    <br />
+                    @{
+                        double KdvliFiyat = ToplamTurar * kdv;
+                        double KdvTutarı = KdvliFiyat - ToplamTurar;
+                    }
+                    <div id="container" class="border-bottom pb-2">
+                        <div class="d-flex justify-content-between mb-3">
+                            <h6 class="font-weight-medium">Kdv Oranı</h6>
+                            <h6 id="totalprice" class="font-weight-medium">@KdvTutarı.ToString("C")</h6>
+                        </div>
+                    </div>
+                    <div class="pt-2">
+                        <div class="d-flex justify-content-between mb-3">
+                            <h5>Ödenecek Toplam Tutar: </h5>
+                            <h5><span id="totalpricedkv">@KdvliFiyat.ToString("C")</span></h5>
+                        </div>
+                        <br />
+                        <button id="btnchecked" class="btn btn-block btn-warning font-weight-bold my-3" style="color:#fff;">Ödemeyi Tamamla</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @await Component.InvokeAsync("_UILayoutFooterComponenetPartial")
+    @await Component.InvokeAsync("_UILayoutScriptComponentPartial")
+
+
+    <script>
+        function deletebasket(value) {
+            var id = value;
+            $.ajax({
+                type: 'POST',
+                url: '/Menu/DeleteBasket?BasketId=' + id,
+                contentType: 'json',
+                success: function () {
+                    window.location.href = "https://localhost:7229/Baskets/Index?MenuTableId=1";
+                }
+            });
+        }
+    </script>
+</body>
+</html>

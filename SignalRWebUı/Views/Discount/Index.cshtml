@@ -1,0 +1,63 @@
+﻿@model List<SignalRWebUı.Dtos.DiscountDto.ResultDiscountDto>
+
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Admin/_AdminLayout.cshtml";
+	int Count = 0;
+	string Title = "";
+	bool Durum = false;
+}
+
+<div class="col-md-12">
+	<div class="card">
+		<div class="card-header">
+			<div class="card-title">Günün İndirimleri Listesi(@Model.Count())</div>
+		</div>
+		<div class="card-body">
+			<div class="card-sub">
+				Günün indirimli ürünleri aşağıda yer almaktadır tema bütünlüğü için iki adet indirimli ürün seçiniz
+			</div>
+			<table class="table mt-3">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Ürün Başlık</th>
+						<th scope="col">İndirim Oranı</th>
+						<th scope="col">Durum</th>
+						<th scope="col">Sil</th>
+						<th scope="col">Güncelle</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var x in Model)
+					{
+						if (x.DiscountStatus)
+						{
+							Title = "Pasif Yap";
+							Durum = false;
+						}
+						else
+						{
+							Title = "Aktif Yap";
+							Durum = true;
+						}
+
+						Count++;
+						<tr>
+							<td>@Count</td>
+							<td>@x.DiscountTitle</td>
+							<td>@x.DiscountAmount%</td>
+							<td><a href="/Discount/DiscountStatusUpdate?DiscountId=@x.DiscountID&&Status=@Durum" class="btn btn-outline-info">@Title</a></td>
+							<td><a href="/Discount/DeleteDiscount?DiscountId=@x.DiscountID" class="btn btn-outline-danger">Sil</a></td>
+							<td><a href="/Discount/GetDiscount?DiscountId=@x.DiscountID" class="btn btn-outline-success">Güncelle</a></td>
+						</tr>
+					}
+				</tbody>
+			</table>
+			<a href="/Discount/CreateDiscount" class="btn btn-outline-primary">Yeni İndirim Girişi</a>
+		</div>
+	</div>
+
+</div>
+
+

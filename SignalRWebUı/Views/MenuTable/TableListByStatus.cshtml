@@ -1,0 +1,78 @@
+﻿@model List<SignalRWebUı.Dtos.MenuTableDtos.ResultMenuTableDto>
+
+@{
+	ViewData["Title"] = "TableListByStatus";
+	Layout = "~/Views/Admin/_AdminLayout.cshtml";
+	string DivBg = "";
+	string Status = "";
+}
+
+
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+@section Scripts{
+	<script type="text/javascript">
+
+		$(document).ready(() => {  //Doküman Çalıştığı Zaman
+
+
+			var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7121/SignalRHub").build();
+
+			$('#connstatus').text(connection.state); //Başka Sürümlerde connection.connectionState diye geçiyo 6.0 da state olarak değişti
+
+			connection.start().then(() => {  //Bağlantı Durumunu Bağlantıkdan Sonra Yaz
+				$('#connstatus').text(connection.state);
+				setInterval(() => {
+					connection.invoke("GetMenuTableList");  //GetMenuTableList İstekte Bulunduk
+				}, 1000); //1 sn'de bir sunucuya istekte bulun
+			}).catch((err) => {
+				console.log(err);
+			});
+
+			connection.on("ReceiverTableListByStatus", (value) => {
+				let Status = "";
+				let DivBg = "";
+
+				$('#menutablelist').empty(); //Bunu Koymassak Sürekli Döngü Üstüne Veri Koyup Duruyo
+				for (var i = 0; i < value.length; i++) {
+					if (value[i].menuStatus == true) {
+						DivBg = "card card-status card-danger";
+						Status = "Masa Dolu";
+					}
+					else {
+						DivBg = "card card-status card-success";
+						Status = "Masa Boş";
+					}
+
+					$('#menutablelist').append(`<div class="col-md-3">
+						<div class="${DivBg}">
+							<div class="card-body ">
+								<div class="row">
+									<div class="col-5">
+										<div class="icon-big text-center">
+											<i class="la la-certificate" style="font-size:50px;"></i>
+										</div>
+									</div>
+									<div class="col-7 d-flex align-items-center">
+										<div class="numbers">
+											<p class="card-category">${value[i].menuName}</p>
+											<h4 class="card-title">${Status}</h4>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>`);
+				}
+			}); //GetMenuTableList içindeki ReceiverCategoryCount keyine istekte bulunduk
+		});
+	</script>
+}
+
+<div class="container-fluid">
+
+	<h4 class="page-title">Anlık Masa Durumları Sayfası</h4>
+	<div class="row" id="menutablelist">
+
+	</div>
+</div>
+

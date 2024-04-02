@@ -1,0 +1,43 @@
+﻿@model SignalRWebUı.Dtos.DiscountDto.CreateDiscountDto
+
+@{
+    ViewData["Title"] = "CreateDiscount";
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+}
+
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Kategori İndirimli Ürün Girişi</div>
+        </div>
+        <form method="post">
+            <div class="card-body">
+
+                <div class="form-group">
+                    <label for="name">Ürün Adı</label>
+                    <input type="text" asp-for="DiscountTitle" class="form-control" id="email" placeholder="Ürün Adı Giriniz...">
+                </div>
+                <div class="form-group">
+                    <label for="amount">İndirim Oranı</label>
+                    <input type="number" asp-for="DiscountAmount" class="form-control" id="email" placeholder="İndirim Oranı Giriniz...">
+                </div>
+                <div class="form-group">
+                    <label for="ıamgeurl">Ürün Görsel</label>
+                    <input type="text" asp-for="DiscountImageUrl" class="form-control" id="email" placeholder="Ürün Görsel Giriniz...">
+                </div>
+                <div class="form-group">
+                    <label for="desc">Ürün Açıklama</label>
+                    <input type="text" asp-for="DiscountDescription" class="form-control" id="email" placeholder="Ürün Açıklaması Giriniz...">
+                </div>
+
+
+            </div>
+            <div class="card-action">
+                <button class="btn btn-success">Ekle</button>
+                <a href="/Discount/Index" class="btn btn-danger">İptal Et</a>
+            </div>
+        </form>
+    </div>
+</div>
+

@@ -1,0 +1,39 @@
+﻿@model SignalRWebUı.Dtos.SocialMediaDtos.UpdateSocialMediaDto
+
+@{
+    ViewData["Title"] = "GetSocialMedia";
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Yeni Sosyal Medya Güncelleme İşlemi</div>
+        </div>
+        <form method="post">
+            <div class="card-body">
+                <input type="hidden" asp-for="SocialMediaID">
+                <div class="form-group">
+                    <label for="title">Başlık</label>
+                    <input type="text" asp-for="SocialMediaTitle" class="form-control" id="email" placeholder="Sosyal Medya Başlığı Giriniz...">
+                </div>
+                <div class="form-group">
+                    <label for="ıcon">Icon</label>
+                    <input type="text" asp-for="SocialMediaIcon" class="form-control" id="email" placeholder="Sosyal Medya Iconu Giriniz...">
+                </div>
+
+                <div class="form-group">
+                    <label for="url">Url</label>
+                    <input type="text" asp-for="SocialMediaUrl" class="form-control" id="email" placeholder="Sosyal Medya Linki Giriniz...">
+                </div>
+
+
+            </div>
+            <div class="card-action">
+                <button class="btn btn-success">Güncelle</button>
+                <a href="/SocialMedia/Index" class="btn btn-danger">İptal Et</a>
+            </div>
+        </form>
+    </div>
+</div>
+

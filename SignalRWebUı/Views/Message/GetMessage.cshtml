@@ -1,0 +1,50 @@
+﻿@model SignalRWebUı.Dtos.MessageDtos.UpdateMessageDto
+
+@{
+    ViewData["Title"] = "GetMessage";
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Mesajlar Güncelleme Formu</div>
+        </div>
+        <form method="post">
+            <div class="card-body">
+                <input type="hidden" asp-for="MessageId">
+                <div class="form-group">
+                    <label for="namesurname">Ad Soyad</label>
+                    <input type="text" asp-for="NameSurname" class="form-control" id="email" placeholder="Lütfen Ad Alanını Giriniz...">
+                </div>
+                <div class="form-group">
+                    <label for="email">Mail Adresi</label>
+                    <input type="email" asp-for="Email" class="form-control" id="email" placeholder="Lütfen Mail Adresinizi Giriniz...">
+                </div>
+                <div class="form-group">
+                    <label for="phonenumber">Telefon Numarası</label>
+                    <input type="text" asp-for="PhoneNumber" class="form-control" id="email" placeholder="Lütfen Telefon Numarasını Giriniz...">
+                </div>
+                <div class="form-group">
+                    <label for="subject">Mesaj Tarihi</label>
+                    <input type="datetime-local" asp-for="MessageSendDate" class="form-control" id="email" placeholder="Lütfen Mesaj Başlığını Giriniz...">
+                </div>
+                <div class="form-group">
+                    <label for="subject">Mesaj Başlığı</label>
+                    <input type="text" asp-for="Subject" class="form-control" id="email" placeholder="Lütfen Mesaj Başlığını Giriniz...">
+                </div>
+                <div class="form-group">
+                    <label for="aciklama">Mesaj Açıklaması</label>
+                    <textarea asp-for="MessageContent" class="form-control" rows="12"></textarea>
+                </div>
+
+
+            </div>
+            <div class="card-action">
+                <button class="btn btn-success">Güncelle</button>
+                <a href="/Message/GetMessageIndex" class="btn btn-danger">İptal Et</a>
+            </div>
+        </form>
+    </div>
+</div>
+

@@ -1,0 +1,30 @@
+﻿@model SignalRWebUı.Dtos.CategoryDtos.CreateCategoryDto
+
+@{
+    ViewData["Title"] = "CreateCategory";
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Kategori Ekleme Formu</div>
+        </div>
+        <form method="post">
+            <div class="card-body">
+
+                <div class="form-group">
+                    <label for="email">Kategori Adı</label>
+                    <input type="text" asp-for="CategoryName" class="form-control" id="email" placeholder="Kategori Adı Giriniz...">
+                </div>
+
+
+            </div>
+            <div class="card-action">
+                <button class="btn btn-success">Ekle</button>
+                <a href="/Category/Index" class="btn btn-danger">İptal Et</a>
+            </div>
+        </form>
+    </div>
+</div>
+

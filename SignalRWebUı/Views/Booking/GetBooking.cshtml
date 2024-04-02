@@ -1,0 +1,48 @@
+﻿@model SignalRWebUı.Dtos.BookingDtos.UpdateBookingDto
+
+
+@{
+    ViewData["Title"] = "GetBooking";
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Rezervasyon Güncelleme İşlemi</div>
+        </div>
+        <form method="post">
+            <div class="card-body">
+                <input type="hidden" asp-for="BookingID">
+                <input type="hidden" asp-for="Description">
+                <div class="form-group">
+                    <label for="adsoyad">Ad Soyad</label>
+                    <input type="text" asp-for="Name" class="form-control" id="email" placeholder="Ad Soyad Giriniz...">
+                </div>
+                <div class="form-group">
+                    <label for="phonenumber">Telefon Numarası</label>
+                    <input type="text" asp-for="Phone" class="form-control" id="email" placeholder="Telefon Numarası Giriniz...">
+                </div>
+                <div class="form-group">
+                    <label for="Mail">Mail Adresi</label>
+                    <input type="text" asp-for="Mail" class="form-control" id="email" placeholder="Mail Adresi Giriniz...">
+                </div>
+                <div class="form-group">
+                    <label for="tarih">Rezervasyon Tarih</label>
+                    <input type="datetime-local" asp-for="Date" class="form-control" id="email">
+                </div>
+                <div class="form-group">
+                    <label for="kisisayisi">Kişi Sayısı</label>
+                    <input type="number" asp-for="PersonCount" class="form-control" id="email" placeholder="Kişi Sayısı Giriniz...">
+                </div>
+
+
+            </div>
+            <div class="card-action">
+                <button class="btn btn-success">Güncelle</button>
+                <a href="/Booking/Index" class="btn btn-danger">İptal Et</a>
+            </div>
+        </form>
+    </div>
+</div>
+

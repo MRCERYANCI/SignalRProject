@@ -1,0 +1,30 @@
+﻿@model SignalRWebUı.Dtos.MenuTableDtos.UpdateMenuTableDto
+
+@{
+    ViewData["Title"] = "GetMenuTable";
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Masa Güncelle İşlemi</div>
+        </div>
+        <form method="post">
+            <div class="card-body">
+                <input type="hidden" asp-for="MenuTableId">
+                <div class="form-group">
+                    <label for="tablename">Masa Adı</label>
+                    <input type="text" asp-for="MenuName" class="form-control" id="email" placeholder="Masa Adı Giriniz...">
+                </div>
+
+
+            </div>
+            <div class="card-action">
+                <button class="btn btn-success">Güncelle</button>
+                <a href="/MenuTable/Index" class="btn btn-danger">İptal Et</a>
+            </div>
+        </form>
+    </div>
+</div>
+

@@ -1,0 +1,60 @@
+﻿@model SignalRWebUı.Dtos.IdentityDtos.RegisterDto
+
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Çokkeçeci Chef - Kayıt Ol</title>
+	<!-- Mobile Specific Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- Font-->
+	<link rel="stylesheet" type="text/css" href="~/colorlib-regform-32/css/nunito-font.css">
+	<!-- Main Style Css -->
+	<link rel="stylesheet" href="~/colorlib-regform-32/css/style.css" />
+	<link rel="shortcut icon" href="~/feane-1.0.0/images/favicon.png" type="">
+
+	<style>
+		body{
+			overflow:hidden;
+		}
+	</style>
+</head>
+<body class="form-v6">
+	<div class="page-content">
+		<div class="form-v6-content">
+			<div class="form-left">
+				<img src="~/colorlib-regform-32/images/Sauce1.jpg" alt="form" style="height:726px; width:484px;">
+			</div>
+			<form class="form-detail" action="#" method="post">
+				<h2>Yeni Kullanıcı Kaydı</h2>
+				<div class="form-row">
+					<input type="text" asp-for="Name" id="full-name" class="input-text" placeholder="Adınızı Giriniz..." required>
+				</div>
+				<div class="form-row">
+					<input type="text" asp-for="Surname" id="your-email" class="input-text" placeholder="Soyadınızı Giriniz..." required>
+				</div>
+				<div class="form-row">
+					<input type="email" asp-for="Mail" id="password" class="input-text" placeholder="Mail Adresinizi Giriniz..." required>
+				</div>
+				<div class="form-row">
+					<input type="text" asp-for="Phone" id="comfirm-password" class="input-text" placeholder="Telefon Numaranızı Giriniz..." required>
+				</div>
+				<div class="form-row">
+					<input type="text" asp-for="UserName" id="comfirm-password" class="input-text" placeholder="Kullanıcı Adınızı Giriniz..." required>
+				</div>
+				<div class="form-row">
+					<input type="password" asp-for="Password" id="comfirm-password" class="input-text" placeholder="Şifrenizi Belirleyiniz..." required>
+				</div>
+				<div class="form-row-last">
+					<input type="submit"  class="register" value="Kayıt Ol">
+				</div>
+			</form>
+		</div>
+	</div>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

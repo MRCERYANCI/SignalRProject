@@ -1,0 +1,47 @@
+﻿@model SignalRWebUı.Dtos.ProductDtos.CreateProductDto
+
+@{
+    ViewData["Title"] = "CreateProduct";
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Yeni Ürün Girişi</div>
+        </div>
+        <form method="post">
+            <div class="card-body">
+
+                <div class="form-group">
+                    <label for="productname">Ürün Adı</label>
+                    <input type="text" asp-for="ProductName" class="form-control" id="email" placeholder="Ürün Adı Giriniz...">
+                </div>
+                <div class="form-group">
+                    <label for="productprice">Ürün Fiyati</label>
+                    <input type="text" asp-for="ProductPrice" class="form-control" id="email" placeholder="Ürün Fiyatını Giriniz...">
+                </div>
+                <div class="form-group">
+                    <label for="productimcategory">Ürün Kategori</label>
+                    @Html.DropDownListFor(x=>x.CategoryId,(List<SelectListItem>) ViewBag.GetCategory,new {@class = "form-control"})
+                </div>
+                <div class="form-group">
+                    <label for="productimageurl">Ürün Görseli</label>
+                    <input type="text" asp-for="ProductImageUrl" class="form-control" id="email" placeholder="Ürün Görseli Giriniz...">
+                </div>
+                <div class="form-group">
+                    <label for="productdescription">Ürün Açıklaması</label>
+                    <textarea class="form-control" asp-for="ProductDescription" rows="8" placeholder="Ürün Açıklaması Giriniz..."></textarea>
+                </div>
+
+
+            </div>
+            <div class="card-action">
+                <button class="btn btn-success">Ekle</button>
+                <a href="/Product/Index" class="btn btn-danger">İptal Et</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+

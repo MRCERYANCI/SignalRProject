@@ -1,0 +1,51 @@
+﻿@model List<SignalRWebUı.Dtos.NotificationDtos.ResultNotificationDto>
+
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Admin/_AdminLayout.cshtml";
+	int Count = 0;
+}
+
+<div class="col-md-12">
+	<div class="card">
+		<div class="card-header">
+			<div class="card-title">Bildirim Listesi(@Model.Count())</div>
+		</div>
+		<div class="card-body">
+			<div class="card-sub">
+				Bildirim ile ilgili işlemleri aşağıdan gerçekleştirebilirsiniz
+			</div>
+			<table class="table mt-3">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Açıklama</th>
+						<th scope="col">Tarih</th>
+						<th scope="col">Durum</th>
+						<th scope="col">Sil</th>
+						<th scope="col">Güncelle</th>
+						<th scope="col">Durumu Değiştir</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var x in Model)
+					{
+						Count++;
+						<tr>
+							<td>@Count</td>
+							<td>@x.NotificationDescription</td>
+							<td>@x.NotificationDate</td>
+							<td>@x.NotificationStatus</td>
+							<td><a href="/Notifications/DeleteNotification?NotificationId=@x.NotificationId" class="btn btn-outline-danger">Sil</a></td>
+							<td><a href="/Notifications/GetNotification?NotificationId=@x.NotificationId" class="btn btn-outline-success">Güncelle</a></td>
+							<td><a href="/Notifications/NotificationStatusChange?NotificationId=@x.NotificationId" class="btn btn-outline-warning">Durumu Değiştir</a></td>
+						</tr>
+					}
+				</tbody>
+			</table>
+			<a href="/Notifications/CreateNotification" class="btn btn-outline-primary">Yeni Bildirim Girişi</a>
+		</div>
+	</div>
+
+</div>
+

@@ -1,0 +1,47 @@
+﻿@model List<SignalRWebUı.Dtos.SocialMediaDtos.ResultSocialMediaDto>
+
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Admin/_AdminLayout.cshtml";
+	int Count = 0;
+}
+
+<div class="col-md-12">
+	<div class="card">
+		<div class="card-header">
+			<div class="card-title">Sosyal Medya Listesi(@Model.Count())</div>
+		</div>
+		<div class="card-body">
+			<div class="card-sub">
+				Sosyal Medya ile ilgili işlemleri aşağıdan gerçekleştirebilirsiniz
+			</div>
+			<table class="table mt-3">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Başlık</th>
+						<th scope="col">Link</th>
+						<th scope="col">Sil</th>
+						<th scope="col">Güncelle</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var x in Model)
+					{
+						Count++;
+						<tr>
+							<td>@Count</td>
+							<td>@x.SocialMediaTitle</td>
+							<td>@x.SocialMediaUrl</td>
+							<td><a href="/SocialMedia/DeleteSocialMedia?SocialMediaId=@x.SocialMediaID" class="btn btn-outline-danger">Sil</a></td>
+							<td><a href="/SocialMedia/GetSocialMedia?SocialMediaId=@x.SocialMediaID" class="btn btn-outline-success">Güncelle</a></td>
+						</tr>
+					}
+				</tbody>
+			</table>
+			<a href="/SocialMedia/CreateSocialMedia" class="btn btn-outline-primary">Yeni Sosyam Medya Girişi</a>
+		</div>
+	</div>
+
+</div>
+

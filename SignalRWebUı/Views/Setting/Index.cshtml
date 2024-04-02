@@ -1,0 +1,48 @@
+﻿@model SignalRWebUı.Dtos.IdentityDtos.UserEditDto
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Profil Güncelleme İşlemi</div>
+        </div>
+        <form method="post">
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="name">Ad</label>
+                    <input type="text" asp-for="Name" class="form-control" id="email" placeholder="Lütfen Adınızı Giriniz...">
+                </div>
+                <div class="form-group">
+                    <label for="surname">Soyad</label>
+                    <input type="text" asp-for="Surname" class="form-control" id="email" placeholder="Lütfen Soyadınızı Giriniz...">
+                </div>
+                <div class="form-group">
+                    <label for="mail">Mail Adresi</label>
+                    <input type="email" asp-for="Mail" class="form-control" id="email" placeholder="Lütfen Mail Adresinizi Giriniz...">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Telefon Numarası</label>
+                    <input type="text" asp-for="UserName" class="form-control" id="email" placeholder="Lütfen Kullanıcı Adınızı Giriniz...">
+                </div>
+                <div class="form-group">
+                    <label for="password">Şifre</label>
+                    <input type="password" asp-for="Password" class="form-control" id="email" placeholder="Lütfen Şifrenizi Giriniz...">
+                </div>
+                <div class="form-group">
+                    <label for="confirmpassword">Şifre Tekrar</label>
+                    <input type="password" asp-for="ConfPassword" class="form-control" id="email" placeholder="Lütfen Şifrenizi Tekrar Giriniz...">
+                </div>
+
+
+            </div>
+            <div class="card-action">
+                <button class="btn btn-success">Güncelle</button>
+            </div>
+        </form>
+    </div>
+</div>
+

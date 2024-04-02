@@ -1,0 +1,42 @@
+﻿@model SignalRWebUı.Dtos.TestimonialDtos.CreateTestimonialDto
+
+@{
+    ViewData["Title"] = "CreateTestimonial";
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Yeni Müşteri Yorumu Ekleme Sayfası</div>
+        </div>
+        <form method="post">
+            <div class="card-body">
+
+                <div class="form-group">
+                    <label for="namesurname">Müşteri Adı Soyadı</label>
+                    <input type="text" asp-for="TestimonialName" class="form-control" id="email" placeholder="Ad Soya Giriniz...">
+                </div>
+                <div class="form-group">
+                    <label for="unvan">Müşteri Ünvanı</label>
+                    <input type="text" asp-for="TestimonialTitle" class="form-control" id="email" placeholder="Ünvan Giriniz...">
+                </div>
+                <div class="form-group">
+                    <label for="imageurl">Müşteri Görsel</label>
+                    <input type="text" asp-for="TestimonialImageUrl" class="form-control" id="email" placeholder="Görsel Seçiniz...">
+                </div>
+                <div class="form-group">
+                    <label for="desc">Müşteri Yorumu</label>
+                    <input type="text" asp-for="TestimonialComment" class="form-control" id="email" placeholder="Yorumu Giriniz...">
+                </div>
+
+
+            </div>
+            <div class="card-action">
+                <button class="btn btn-success">Ekle</button>
+                <a href="/Testimonial/Index" class="btn btn-danger">İptal Et</a>
+            </div>
+        </form>
+    </div>
+</div>
+

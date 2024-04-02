@@ -1,0 +1,50 @@
+﻿@model SignalRWebUı.Dtos.SliderDtos.UpdateSliderDto
+
+@{
+    ViewData["Title"] = "GetFeature";
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Yeni Öne Çıkan Alan Girişi</div>
+        </div>
+        <form method="post">
+            <div class="card-body">
+                <input type="hidden" asp-for="SliderId">
+                <div class="form-group">
+                    <label for="title1">1.Başlık</label>
+                    <input type="text" asp-for="SliderTitle1" class="form-control" id="email" placeholder="1.Başlığı Giriniz...">
+                </div>
+                <div class="form-group">
+                    <label for="title2">2.Başlık</label>
+                    <input type="text" asp-for="SliderTitle2" class="form-control" id="email" placeholder="2.Başlığı Giriniz...">
+                </div>
+                <div class="form-group">
+                    <label for="title3">3.Başlık</label>
+                    <input type="text" asp-for="SliderTitle3" class="form-control" id="email" placeholder="3.Başlığı Giriniz...">
+                </div>
+                <div class="form-group">
+                    <label for="desc1">1.Açıklama</label>
+                    <input type="text" asp-for="Description1" class="form-control" id="email" placeholder="1.Açıklamayı Giriniz...">
+                </div>
+                <div class="form-group">
+                    <label for="desc2">2.Açıklama</label>
+                    <input type="text" asp-for="Description2" class="form-control" id="email" placeholder="2.Açıklamayı Giriniz...">
+                </div>
+                <div class="form-group">
+                    <label for="desc3">3.Açıklama</label>
+                    <input type="text" asp-for="Description3" class="form-control" id="email" placeholder="3.Açıklamayı Giriniz...">
+                </div>
+
+
+            </div>
+            <div class="card-action">
+                <button class="btn btn-success">Güncelle</button>
+                <a href="/Slider/Index" class="btn btn-danger">İptal Et</a>
+            </div>
+        </form>
+    </div>
+</div>
+

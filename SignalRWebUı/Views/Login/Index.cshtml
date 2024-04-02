@@ -1,0 +1,110 @@
+﻿@model SignalRWebUı.Dtos.IdentityDtos.LoginDtos
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Çokkeçeci Chef - Giriş Yap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="~/colorlib-regform-32/css/nunito-font.css">
+    <link rel="stylesheet" href="~/colorlib-regform-32/css/style.css" />
+    <link rel="shortcut icon" href="~/feane-1.0.0/images/favicon.png" type="">
+
+    <style>
+        body {
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="form-v6">
+    <div class="page-content">
+        <div class="form-v6-content">
+            <div class="form-left">
+                <img src="~/colorlib-regform-32/images/Sauce1.jpg" alt="form" style="height:584px; width:484px;">
+            </div>
+            <form class="form-detail" action="#" method="post">
+                <h2>Çokkeçeci Chef Giriş Paneli</h2>
+                <div class="form-row">
+                    <input type="text" asp-for="UserName" id="username" class="input-text" placeholder="Kulanıcı Adınızı Giriniz..." required>
+                </div>
+
+                <div class="form-row">
+                    <input type="password" asp-for="Password"  id="comfirm-password" class="input-text" placeholder="Şifrenizi Giriniz..." required>
+                </div>
+
+                <div class="form-row">
+                    <input type="hidden" asp-for="Ulke" id="Ulke" >
+                </div>
+                <div class="form-row">
+                    <input type="hidden" asp-for="PostaKodu" id="PostaKodu">
+                </div>
+                <div class="form-row">
+                    <input type="hidden" asp-for="Sehir" id="Sehir">
+                </div>
+                <div class="form-row">
+                    <input type="hidden" asp-for="Ilce" id="Ilce">
+                </div>
+                <div class="form-row">
+                    <input type="hidden" asp-for="Mahalle" id="Mahalle">
+                </div>
+                <div class="form-row">
+                    <input type="hidden" asp-for="Cadde" id="Cadde">
+                </div>
+
+               
+                <div class="form-row-last">
+                    <input id="btn" type="submit" class="register" value="Giriş Yap">
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+
+<script>
+    let latitude, longitude = "";
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(onSuccess, onError);
+    } else {
+        alert("tarayıcınız konum bilgisini alamıyor...");
+    }
+
+    function onSuccess(position) {
+        let latitude = position.coords.latitude;
+        let longitude = position.coords.longitude;
+
+        const api_key = "30c867d8a8e34fa98bcb0700bcc76098"
+        const url = `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${api_key}`;
+
+        fetch(url).then(response => response.json()).then(result => {
+            let details = result.results[0].components;
+
+            let { country, postcode, province, road, town, suburb } = details;
+
+            document.getElementById("Ulke").value = country;
+            document.getElementById("PostaKodu").value = postcode;
+            document.getElementById("Sehir").value = province;
+            document.getElementById("Ilce").value = town;
+            document.getElementById("Mahalle").value = suburb;
+            document.getElementById("Cadde").value = road;
+        });
+    }
+
+    function onError(error) {
+        if (error.code == 1) {
+            alert("Kullanıcı Erişim İznini Reddetti.")
+        } else if (error.code == 2) {
+            alert("Konum alanımadı");
+        } else {
+            alert("Sistemsel Bir Hata Oluştu...");
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,40 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Çokkeçeci Chef - İki Adımlı Doğrulama</title>
+    <link rel="stylesheet" href="~/OTP-Verification-Code-main/style.css" />
+    <script src="https://kit.fontawesome.com/c3ca4e6634.js" crossorigin="anonymous"></script>
+    <script src="~/OTP-Verification-Code-main/script.js" defer></script>
+    <link rel="shortcut icon" href="~/feane-1.0.0/images/favicon.png" type="">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <i class="fa-solid fa-shield-halved"></i>
+        </header>
+        <h4>Enter the Verify Code</h4>
+        <form method="post">
+            <div class="input-field">
+                <input type="number" name="Number1">
+                <input type="number" name="Number2" disabled />
+                <input type="number" name="Number3" disabled />
+                <input type="number" name="Number4" disabled />
+                <input type="number" name="Number5" disabled />
+                <input type="number" name="Number6" disabled />
+
+            </div>
+            <button>Doğrula</button>
+            <div class="backup"><a href="#">Use your backup code</a></div>
+        </form>
+    </div>
+
+</body>
+</html>

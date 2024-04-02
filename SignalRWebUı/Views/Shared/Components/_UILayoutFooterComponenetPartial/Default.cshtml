@@ -1,0 +1,65 @@
+﻿@model SignalRWebUı.Dtos.ContactDtos.GetContactDto
+
+<footer class="footer_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 footer-col">
+                <div class="footer_contact">
+                    <h4>
+                        Bize Ulaşın
+                    </h4>
+                    <div class="contact_link_box">
+                        <a href="@Html.DisplayFor(x=>x.ContactLocation)">
+                            <i class="fa fa-map-marker" aria-hidden="true"></i>
+                            <span>
+                                Lokasyon
+                            </span>
+                        </a>
+                        <a href="">
+                            <i class="fa fa-phone" aria-hidden="true"></i>
+                            <span>
+                                Telefon @Html.DisplayFor(x=>x.ContactPhone)
+                            </span>
+                        </a>
+                        <a href="">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                            <span>
+                                @Html.DisplayFor(x=>x.ContactMail)
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 footer-col">
+                <div class="footer_detail">
+                    <a href="/Default/Index" class="footer-logo">
+                        @Html.DisplayFor(x=>x.FooterTitle)
+                    </a>
+                    <p>
+                        @Html.DisplayFor(x=>x.ContactFooterDescription)
+                    </p>
+                    @await Component.InvokeAsync("_FooterSocialMediaComponentPartial")
+                </div>
+            </div>
+            <div class="col-md-4 footer-col">
+                <h4>
+                    @Html.DisplayFor(x=>x.OpenDays)
+                </h4>
+                <p>
+                    @Html.DisplayFor(x=>x.OpenDaysDescription)
+                </p>
+                <p>
+                    Sabah 10:00 - Akşam 22:00
+                </p>
+            </div>
+        </div>
+        <div class="footer-info">
+            <p>
+                &copy; <span id="displayYear"></span> Tüm Hakları Saklıdır
+                <a href="https://html.design/">Çokkeçeci Chef</a><br><br>
+                &copy; <span id="displayYear"></span> Distributed By
+                <a href="https://themewagon.com/" target="_blank">Çokkeçeci Yazılım</a>
+            </p>
+        </div>
+    </div>
+</footer>

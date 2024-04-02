@@ -1,0 +1,133 @@
+﻿
+
+<div class="main-header">
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+
+        $(document).ready(() => {  //Doküman Çalıştığı Zaman
+
+
+            var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7121/SignalRHub").build();
+
+            $('#connstatus').text(connection.state); //Başka Sürümlerde connection.connectionState diye geçiyo 6.0 da state olarak değişti
+
+            connection.start().then(() => {  //Bağlantı Durumunu Bağlantıkdan Sonra Yaz
+                $('#connstatus').text(connection.state);
+                setInterval(() => {
+                    connection.invoke("SendNotification");  //SendNotification İstekte Bulunduk
+                }, 1000); //1 sn'de bir sunucuya istekte bulun
+            }).catch((err) => {
+                console.log(err);
+            });
+
+            connection.on("ReceiverNotificationCountByStatus", (value) => {
+                $("#notificationcount").text(value);
+            }); //SendNotification içindeki ReceiverNotificationCountByStatus keyine istekte bulunduk
+
+
+            connection.on("ReceiverNotificationCountByStatus", (value) => {
+                $("#notificationtext").text( value + " Yeni Bildiriminiz Var");
+            }); //SendNotification içindeki ReceiverNotificationCountByStatus keyine istekte bulunduk
+
+            connection.on("ReceiverNotificationCountByStatusFalse", (value) => {
+
+                $('#notificationlist').empty(); //Bunu Koymassak Sürekli Döngü Üstüne Veri Koyup Duruyo
+                for (var i = 0; i < value.length; i++) {
+
+                    $('#notificationlist').append(`<a href="#">
+                                                               <div class="${value[i].notificationType}"> <i class="${value[i].notificationIcon}"></i> </div>
+                                                                    <div class="notif-content">
+                                                                        <span class="block">
+                                                                             ${value[i].notificationDescription}
+                                                                        </span>
+                                                                        <span class="time">5 minutes ago</span>
+                                                               </div>
+                                                            </a>`);
+                }
+            }); //SendNotification içindeki ReceiverNotificationCountByStatusFalse keyine istekte bulunduk
+        });
+    </script>
+
+
+    <div class="logo-header">
+        <a href="/Default/Index" class="logo">
+            Çokkeçeci Chef
+        </a>
+        <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <button class="topbar-toggler more"><i class="la la-ellipsis-v"></i></button>
+    </div>
+    <nav class="navbar navbar-header navbar-expand-lg">
+        <div class="container-fluid">
+
+            <form class="navbar-left navbar-form nav-search mr-md-3" action="">
+                <div class="input-group">
+                    <input type="text" placeholder="Aramak İstediğiniz Kelime ..." class="form-control">
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+                            <i class="la la-search search-icon"></i>
+                        </span>
+                    </div>
+                </div>
+            </form>
+            <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
+                <li class="nav-item dropdown hidden-caret">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="la la-envelope"></i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Gelen Mesajlar</a>
+                        <a class="dropdown-item" href="/Booking/Index">Rezervasyonlar</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/Contact/Index">İletişim</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown hidden-caret">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="la la-bell"></i>
+                        <span class="notification" id="notificationcount"></span>
+                    </a>
+                    <ul class="dropdown-menu notif-box" aria-labelledby="navbarDropdown">
+                        <li>
+                            <div class="dropdown-title" id="notificationtext">/div>
+                        </li>
+                        <li>
+                            <div class="notif-center" id="notificationlist">
+                            </div>
+                        </li>
+                        <li>
+                            <a class="see-all" href="/Notifications/Index"> <strong>Tüm Bildirimleri Gör</strong> <i class="la la-angle-right"></i> </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> <img src="~/Ready-Bootstrap-Dashboard-master/assets/img/WhatsApp Image 2023-11-13 at 23.45.07.jpeg" alt="user-img" width="38" height="36" class="img-circle"><span>@ViewBag.Name</span></span> </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li>
+                            <div class="user-box">
+                                <div class="u-img"><img src="~/Ready-Bootstrap-Dashboard-master/assets/img/WhatsApp Image 2023-11-13 at 23.45.07.jpeg" alt="user"></div>
+                                <div class="u-text">
+                                    <h4>@ViewBag.Name @ViewBag.Surname</h4>
+                                    <p class="text-muted">@ViewBag.Mail</p><a href="/MenuTable/TableListByStatus" class="btn btn-rounded btn-danger btn-sm">Menüyü Gör</a>
+                                </div>
+                            </div>
+                        </li>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/MenuTable/Index"><i class="ti-user"></i> Menü</a>
+                        <a class="dropdown-item" href="/Setting/Index"></i> Ayarlar</a>
+                        <a class="dropdown-item" href="/Booking/Index"><i class="ti-email"></i> Rezervasyonlar</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/ProgressBar/Index"><i class="ti-settings"></i> İstatistik</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/LogOut/Index"><i class="fa fa-power-off"></i> Çıkış Yap</a>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>

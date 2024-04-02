@@ -1,0 +1,46 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+}
+
+
+
+@section Scripts
+    {
+    <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <script type="text/javascript">
+                            $(document).ready(() => {  //Doküman Çalıştığı Zaman
+                                var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7121/SignalRHub").build();
+
+                                $('#connstatus').text(connection.state); //Başka Sürümlerde connection.connectionState diye geçiyo 6.0 da state olarak değişti
+
+                                connection.start().then(() => {  //Bağlantı Durumunu Bağlantıkdan Sonra Yaz
+                                    $('#connstatus').text(connection.state);
+                                    
+                                }).catch((err) => {
+                                    console.log(err);
+                                });
+
+                                connection.on("ReceiverCategoryCount", (value) => {
+                                    $('#categorycount').text(value);
+                                }); //SendCategoryCount içindeki ReceiverCategoryCount keyine istekte bulunduk
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <div class="alert alert-success">Bağlantının Durumu: <strong id="connstatus"></strong></div>
+        <div class="alert alert-info">Kategori Sayısı: <strong id="categorycount"></strong></div>
+    </div>
+</div>

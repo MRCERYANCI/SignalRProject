@@ -1,0 +1,40 @@
+﻿@model SignalRWebUı.Dtos.NotificationDtos.UpdateNotificationDto 
+
+@{
+    ViewData["Title"] = "GetNotification";
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Bildirim Güncelleme İşlemi</div>
+        </div>
+        <form method="post">
+            <div class="card-body">
+                <input type="hidden" asp-for="NotificationId">
+                <input type="hidden" asp-for="NotificationDate">
+                <div class="form-group">
+                    <label for="desc">Bildirim Açıklama</label>
+                    <input type="text" asp-for="NotificationDescription" class="form-control" id="email" placeholder="Bildirim Açıklaması Giriniz...">
+                </div>
+                <div class="form-group">
+                    <label for="notification">Bildirim Türü</label>
+                    <select asp-for="NotificationType" class="form-control">
+                        <option value="notif-icon notif-primary">Rezervasyon Bildirimi</option>
+                        <option value="notif-icon notif-success">Yorum Bildirimi</option>
+                        <option value="notif-icon notif-danger">Sipariş Bildirimi</option>
+                    </select>
+                </div>
+
+
+            </div>
+            <div class="card-action">
+                <button class="btn btn-success">Güncelle</button>
+                <a href="/Notifications/Index" class="btn btn-danger">İptal Et</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+

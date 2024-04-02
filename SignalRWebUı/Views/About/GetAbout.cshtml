@@ -1,0 +1,38 @@
+﻿@model SignalRWebUı.Dtos.AboutDtos.UpdateAboutDto
+
+@{
+    ViewData["Title"] = "GetAbout";
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Hakkımızda Güncelleme Formu</div>
+        </div>
+        <form method="post">
+            <div class="card-body">
+                <input type="hidden" asp-for="AboutID">
+                <div class="form-group">
+                    <label for="baslik">Başlık</label>
+                    <input type="text" asp-for="AboutTitle" class="form-control" id="email" placeholder="Başlık Giriniz...">
+                </div>
+                <div class="form-group">
+                    <label for="imageurl">Görsel</label>
+                    <input type="text" asp-for="AboutImageUrl" class="form-control" id="email" placeholder="Başlık Giriniz...">
+                </div>
+                <div class="form-group">
+                    <label for="aciklama">Açıklama</label>
+                    <textarea asp-for="AboutDescription" class="form-control" rows="8"></textarea>
+                </div>
+
+
+            </div>
+            <div class="card-action">
+                <button class="btn btn-success">Güncelle</button>
+                <a href="/About/Index" class="btn btn-danger">İptal Et</a>
+            </div>
+        </form>
+    </div>
+</div>
+

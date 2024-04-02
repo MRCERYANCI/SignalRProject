@@ -1,0 +1,54 @@
+﻿@model List<SignalRWebUı.Dtos.MessageDtos.ResultMessageDto>
+
+@{
+    ViewData["Title"] = "GetMessageIndex";
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    int Count = 0;
+}
+
+<div class="col-md-12">
+	<div class="card">
+		<div class="card-header">
+			<div class="card-title">Hakkımızda Listesi(@Model.Count())</div>
+		</div>
+		<div class="card-body">
+			<div class="card-sub">
+				Hakkımızda Alanıyla İlgili İşlemleri Yapabilirsiniz. Tema Bütünlüğü İçin Sadece 1 Tane Hakkımızda Alanı Oluşturmayı Unutmayın.
+			</div>
+			<table class="table mt-3">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Ad Soyad</th>
+						<th scope="col">Mail Adresi</th>
+						<th scope="col">Telefon</th>
+						<th scope="col">Gönderim Tarihi</th>
+						<th scope="col">Sil</th>
+						<th scope="col">Güncelle</th>
+						<th scope="col">Mesajı Gör</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var x in Model)
+					{
+						Count++;
+						<tr>
+							<td>@Count</td>
+							<td>@x.NameSurname</td>
+							<td>@x.Email</td>
+							<td>@x.PhoneNumber</td>
+							<td>@(((DateTime)x.MessageSendDate).ToString("dd MMMM dddd yyyy"))</td>
+							<td><a href="/Message/DeleteMessage?MessageId=@x.MessageId" class="btn btn-outline-danger">Sil</a></td>
+							<td><a href="/Message/GetMessage?MessageId=@x.MessageId" class="btn btn-outline-success">Güncelle</a></td>
+							<td><a href="/Message/GetContentMessage?MessageId=@x.MessageId" class="btn btn-outline-info">Mesajı Gör</a></td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+</div>
+
+
+

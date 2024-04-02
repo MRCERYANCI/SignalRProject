@@ -1,0 +1,41 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html>
+
+@await Component.InvokeAsync("_UILayoutHeadComponentPartial")
+
+<body class="sub_page">
+
+    @await Component.InvokeAsync("_MenuNavbarComponenetPartial")
+
+    <br /><br />
+    @await Component.InvokeAsync("DefaultOurMenuComponentPartial")
+
+    @await Component.InvokeAsync("_UILayoutFooterComponenetPartial")
+    @await Component.InvokeAsync("_UILayoutScriptComponentPartial")
+
+
+    <script>
+        function showproductid(value) {
+            var id = value;
+            $.ajax({
+                type: 'POST',
+                url: '/Menu/CreateBasket?PrdouctId=' + id,
+                data: { item: id },
+                contentType: 'json',
+                success: function () {
+                    swal("Seçilen Ürün ID: " + id, "Seçtiğiniz Ürün Sepete Eklenmiştir", "success");
+                }
+            });
+        }
+    </script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</body>
+
+</html>

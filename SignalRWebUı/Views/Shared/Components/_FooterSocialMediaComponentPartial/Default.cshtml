@@ -1,0 +1,10 @@
+﻿@model List<SignalRWebUı.Dtos.SocialMediaDtos.ResultSocialMediaDto>
+
+<div class="footer_social">
+    @foreach(var x in Model)
+    {
+        <a href="@x.SocialMediaUrl">
+            <i class="@x.SocialMediaIcon" aria-hidden="true"></i>
+        </a>
+    }
+</div>

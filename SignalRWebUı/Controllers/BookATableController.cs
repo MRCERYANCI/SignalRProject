@@ -35,7 +35,7 @@ namespace SignalRWebUı.Controllers
             if (responseMessage.IsSuccessStatusCode)//Eğer istek attığımız apiden(responsemessage) 200-299 arası durum kodu dönerse
             {
                 MimeMessage mimeMessage = new MimeMessage();
-                MailboxAddress mailboxAddressFrom = new MailboxAddress("Çokkeçeci Yazılım", "cokkececibbva@gmail.com");
+                MailboxAddress mailboxAddressFrom = new MailboxAddress("Title Kısmı", "Gönderilecek Mail");
                 MailboxAddress mailboxAddressTo = new MailboxAddress("User", createBookingDto.Mail);
 
                 mimeMessage.From.Add(mailboxAddressFrom);
@@ -49,7 +49,7 @@ namespace SignalRWebUı.Controllers
                 mimeMessage.Subject = "Rezervasyonuz İçin Teşekkür Ederiz";
                 SmtpClient smtpClient = new SmtpClient();
                 smtpClient.Connect("smtp.gmail.com", 587, false);
-                smtpClient.Authenticate("cokkececibbva@gmail.com", "fhbwiirrctprzmbu");
+                smtpClient.Authenticate("Gönderilecek Mail", "Mail Şifre");
                 smtpClient.Send(mimeMessage);
                 smtpClient.Disconnect(true);
 

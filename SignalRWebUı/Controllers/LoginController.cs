@@ -44,7 +44,7 @@ namespace SignalRWebUı.Controllers
                     string Giris_Yapılan_Adres = $"{loginDtos.Mahalle} {loginDtos.Cadde}, {loginDtos.PostaKodu} {loginDtos.Sehir} {loginDtos.Ilce}, {loginDtos.Ulke}";
 
                     MimeMessage mimeMessage = new MimeMessage();
-                    MailboxAddress mailboxAddressFrom = new MailboxAddress("Title Kısmı", "Gönderilecek Mail");
+                    MailboxAddress mailboxAddressFrom = new MailboxAddress("Çokkeçeci Yazılım", "cokkececibbva@gmail.com");
                     MailboxAddress mailboxAddressTo = new MailboxAddress("User", values.Email);
 
                     mimeMessage.From.Add(mailboxAddressFrom);
@@ -58,7 +58,7 @@ namespace SignalRWebUı.Controllers
                     mimeMessage.Subject = "Doğrulama Kodu İsteği";
                     SmtpClient smtpClient = new SmtpClient();
                     smtpClient.Connect("smtp.gmail.com", 587, false);
-                    smtpClient.Authenticate("Gönderilecek Mail", "Mail Şifre");
+                    smtpClient.Authenticate("cokkececibbva@gmail.com", "fhbwiirrctprzmbu");
                     smtpClient.Send(mimeMessage);
                     smtpClient.Disconnect(true);
                 }
